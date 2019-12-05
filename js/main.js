@@ -1,3 +1,5 @@
+
+
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
@@ -8,10 +10,11 @@ scene.fog = new THREE.Fog( 0x000000, 250, 1400 );
 
 // CAMERA
 camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1500 );
-//var controls = new THREE.OrbitControls( camera, renderer.domElement );
-var cameraTarget = new THREE.Vector3( 0, 1, 5 );
+var cameraTarget = new THREE.Vector3( 0, 1, 0 );
 camera.position.set( 0, 2, 10 );
-//controls.update();
+
+var controls = new THREE.OrbitControls( camera, renderer.domElement );
+controls.update();
 
 // SCENE
 scene = new THREE.Scene();
@@ -64,17 +67,17 @@ document.body.appendChild( renderer.domElement );
 renderer.shadowMap.enabled = true;
 
 var animate = function () {
-  requestAnimationFrame( animate );
-  //controls.update();
+  controls.update();
   
+  
+  
+  requestAnimationFrame( animate );
   cube.rotation.y += 0.01;
   renderer.render(
     scene,
     camera,
     camera.lookAt( cameraTarget )
-  );
-
-};
-
+    );
+  };
 
 animate();
